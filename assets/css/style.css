@@ -1,0 +1,18 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+h2 {
+    color: rgb(4, 4, 4);
+    background-color: rgb(143, 168, 168);
+}
+
+body {
+    background-color: rgb(206, 198, 188);
+}
+
+button {
+    background-color: rgb(68, 27, 105);
+}
