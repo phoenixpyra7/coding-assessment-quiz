@@ -21,8 +21,7 @@ function showScore() {
     questionsScreen.style.display = "none";
     scoreScreen.style.display = null;
 }
-
-//how would i know where to put eventlisteners? also single quote also?
+//event listener to proceed to the questions
 startButton.addEventListener('click', function (event) {
     showQuestions();
 });
