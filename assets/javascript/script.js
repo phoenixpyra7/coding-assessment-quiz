@@ -2,6 +2,7 @@ var startScreen = document.querySelector('.start');
 var questionsScreen = document.querySelector('.questions');
 var scoreScreen = document.querySelector('.score');
 var startButton = document.querySelector('#startbtn');
+var headerContainer =document.querySelector('.header'); //not sure if i need this
 
 
 function showStart() {
