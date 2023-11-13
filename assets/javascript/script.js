@@ -23,6 +23,7 @@ function showScore() {
 }
 //event listener to proceed to the questions
 startButton.addEventListener('click', function (event) {
+    if (event.target.matches('button'));
     showQuestions();
 });
 
