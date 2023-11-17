@@ -16,3 +16,7 @@ body {
 button {
     background-color: rgb(68, 27, 105);
 }
+
+#startbtn {
+    align-self: center;
+}

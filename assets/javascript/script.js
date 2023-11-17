@@ -36,10 +36,9 @@ var questions = [
     }
 ];
 
-
 function showStart() {
     questionHeader.style.display = "none"; //all screens hidden from the start page
-    startScreen.style.display = null; 
+    startScreen.style.display = null;
     questionsScreen.style.display = "none";
     scoreScreen.style.display = "none";
     scoreHeader.style.display = "none";
@@ -51,21 +50,20 @@ startButton.addEventListener('click', function (event) {
     showQuestion(0);
 });
 
-
 function showQuestions() {
     questionHeader.style.display = null; // all screens hidden from the questions paage, still show start header
     startScreen.style.display = "none";
     questionsScreen.style.display = null;
     scoreScreen.style.display = "none";
     scoreHeader.style.display = "none";
-
 }
+
 function setNextQuestion() {
     showQuestion(currentQuestionIndex); // show a question from our question index
-    currentQuestionIndex ++ ; //current question plus 1
+    currentQuestionIndex++; //current question plus 1
     if (currentQuestionIndex === 3) { // questions index 0123
-        currentQuestionIndex = 0 ; //loop back after all questions answered
-        showScore() ; //call the score
+        currentQuestionIndex = 0; //loop back after all questions answered
+        showScore(); //call the score
     }
 }
 
@@ -81,7 +79,7 @@ function showQuestion(currentQuestionIndex) { //current question index now equal
     answer2.innerHTML = questions[currentQuestionIndex].options[1];
     answer3.innerHTML = questions[currentQuestionIndex].options[2];
     answer4.innerHTML = questions[currentQuestionIndex].options[3];
-    questionsScreen.append(questionP, answer1, answer2, answer3, answer4);
+    questionsScreen.append(questionP, answer1, answer2, answer3, answer4); // append questions and answers
 }
 
 //event listener to proceed to the score
@@ -92,7 +90,7 @@ questionsScreen.addEventListener('click', function (event) {
 });
 
 function showScore() {
-    questionHeader.style.display = "none";
+    questionHeader.style.display = "none"; // all screens hidden from the score paage, still show start header
     startScreen.style.display = "none";
     questionsScreen.style.display = "none";
     scoreScreen.style.display = null;
