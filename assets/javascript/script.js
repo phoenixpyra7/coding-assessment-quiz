@@ -16,8 +16,8 @@ var questions = [
     },
     {
         question: "Which of the following data types is called a compound data type?",
-        options: ["A. String", "B. Array", "C. Boolean", "D. Symbol"],
-        correctAnswer: 2
+        options: ["A. String", "B. Symbol", "C. Boolean", "D. Array"],
+        correctAnswer: 4
     },
     {
         question: "Which keyword declares a local variable, meaning the variable can only be accessed within the block of code where it is declared ?",
@@ -26,7 +26,7 @@ var questions = [
     },
     {
         question: "How do you inset a copyright symbol in HTML?",
-        options: ["A. @copy", "B. &#167", "C. C/2023", "D. &#169"],
+        options: ["A. @copy", "B. & #167", "C. C/2023", "D. & #169"], //put space in B and D-othwise they gen a symbol
         correctAnswer: 3
     },
     {
@@ -34,6 +34,7 @@ var questions = [
         options: ["A. Fixed", "B. Straight", "C. Sticky", "D. Absolute"],
         correctAnswer: 1
     }
+    // I need to give the correct answers points
 ];
 
 function showStart() {
@@ -53,17 +54,17 @@ startButton.addEventListener('click', function (event) {
 function showQuestions() {
     questionHeader.style.display = null; // all screens hidden from the questions paage, still show start header
     startScreen.style.display = "none";
-    questionsScreen.style.display = null;
+    questionsScreen.style.display = null; //do I need to do this for the questions themselves?
     scoreScreen.style.display = "none";
     scoreHeader.style.display = "none";
 }
 
 function setNextQuestion() {
-    showQuestion(currentQuestionIndex); // show a question from our question index
+    showQuestion(currentQuestionIndex); // show a question from the question index
     currentQuestionIndex++; //current question plus 1
-    if (currentQuestionIndex === 3) { // questions index 0123
+    if (currentQuestionIndex === 6) { // questions 12345 -not weighted like the index ie 3. if mak 6 i see all 5
         currentQuestionIndex = 0; //loop back after all questions answered
-        showScore(); //call the score
+        showScore(); //call the score. Don't have point system yet
     }
 }
 
