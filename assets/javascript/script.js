@@ -43,7 +43,7 @@ function showStart() {
     questionsScreen.style.display = "none";
     scoreScreen.style.display = "none";
     scoreHeader.style.display = "none";
-}
+};
 //event listener to proceed to the questions
 startButton.addEventListener('click', function (event) {
     if (event.target.matches('button'));
@@ -65,13 +65,13 @@ function setNextQuestion() {
     if (currentQuestionIndex === 6) { // questions 12345 -not weighted like the index ie 3. if mak 6 i see all 5
         currentQuestionIndex = 0; //loop back after all questions answered - No longer works
         showScore(); //call the score. Don't have point system yet
-    }
-}
+    };
+};
 
-function showQuestion(currentQuestionIndex) { //current question index now equals 0
+function showQuestion(currentQuestionIndex) { //current question index now equals 0 -but why if its 1 now when i fixed
     // console.log("is this working?") 
     var questionP = document.createElement("p");
-    questionP.innerHTML = questions[currentQuestionIndex].question;
+    questionP.innerHTML = questions[currentQuestionIndex].question; //dont have to touch bttn to get nxt, how fix?
     var answer1 = document.createElement("button");
     var answer2 = document.createElement("button");
     var answer3 = document.createElement("button");
@@ -81,11 +81,11 @@ function showQuestion(currentQuestionIndex) { //current question index now equal
     answer3.innerHTML = questions[currentQuestionIndex].options[2];
     answer4.innerHTML = questions[currentQuestionIndex].options[3];
     questionsScreen.append(questionP, answer1, answer2, answer3, answer4); // append questions and answers
-}
+};
 
 //event listener to proceed to the score
 questionsScreen.addEventListener('click', function (event) {
-    if (event.target.matches('button')); //what is the word button referencing
+    if (event.target.matches('button')); //what is the word button referencing no class, just strtbttn class
     //console.log('the button was hit')    -this was to test the button, which worked
     setNextQuestion();
 });
@@ -94,17 +94,13 @@ function showScore() {
     questionHeader.style.display = "none"; // all screens hidden from the score paage, still show start header
     startScreen.style.display = "none";
     questionsScreen.style.display = "none";
-    scoreScreen.style.display = null;
+    scoreScreen.style.display = null; //why is style white. double checked all poss
     scoreHeader.style.display = null;
-}
-
-
-
-
+};
 
 function init() {
     showStart();
-}
+};
 
 init();
 
