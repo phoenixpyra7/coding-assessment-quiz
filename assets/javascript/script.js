@@ -7,7 +7,7 @@ var question = document.querySelector('question');
 var nextBtn = document.querySelector('next');
 var questionHeader = document.getElementById('question-header');
 var scoreHeader = document.getElementById('score-header');
-var currentQuestionIndex = 0
+var currentQuestionIndex = 1 // changed from 0 to 1 now it works
 var questions = [
     {
         question: 'Which HTML tag does not require a closing tag?',
@@ -63,7 +63,7 @@ function setNextQuestion() {
     showQuestion(currentQuestionIndex); // show a question from the question index
     currentQuestionIndex++; //current question plus 1
     if (currentQuestionIndex === 6) { // questions 12345 -not weighted like the index ie 3. if mak 6 i see all 5
-        currentQuestionIndex = 0; //loop back after all questions answered
+        currentQuestionIndex = 0; //loop back after all questions answered - No longer works
         showScore(); //call the score. Don't have point system yet
     }
 }
