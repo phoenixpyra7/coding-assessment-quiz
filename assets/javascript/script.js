@@ -6,11 +6,13 @@ var headerContainer = document.querySelector('.header'); //not sure if i need th
 var question = document.querySelector('question');
 var answerButtons = document.getElementById("answers");
 var nextBtn = document.querySelector('next');
+var submitButton = document.querySelector("#submit-button");
 var questionHeader = document.getElementById('question-header');
 var scoreHeader = document.getElementById('score-header');
 var score = document.querySelector("#score");
 var currentQuestionIndex = 1 // changed from 0 to 1 now it works
 var answer = document.querySelector("#correct-answer");
+var userInitials = document.querySelector("#initials");
 var questions = [
     {
         question: 'Which HTML tag does not require a closing tag?',
@@ -47,12 +49,12 @@ function showStart() {
     scoreScreen.style.display = "none";
     scoreHeader.style.display = "none";
 };
-//event listener to proceed to the questions
-startButton.addEventListener('click', function (event) {
-    if (event.target.matches('button'));
-    showQuestions();
-    showQuestion(0);
-});
+// //event listener to proceed to the questions
+// startButton.addEventListener('click', function (event) {
+//     if (event.target.matches('button'));
+//     showQuestions();
+//     showQuestion(0);
+// });
 
 function showQuestions() {
     questionHeader.style.display = null; // all screens hidden from the questions paage, still show start header
@@ -105,10 +107,17 @@ function init() {
     showStart();
 };
 //save user section
-submitButton.addEventListener("click", function (event) {
-    event.preventDefault();
+// submitButton.addEventListener("click", function (event)) {  // need to fix this
+//     event.preventDefault();
 
-    submitButton.setAttribute("disabled", ""); //disabled submit button 
+//     submitButton.setAttribute("disabled", "");  //disabled submit button 
+
+//event listener to proceed to the questions
+startButton.addEventListener('click', function (event) {
+    if (event.target.matches('button'));
+    showQuestions();
+    showQuestion(0);
+
     //user initials
     var userScore = {
         initials: userInitials.value.trim(),
