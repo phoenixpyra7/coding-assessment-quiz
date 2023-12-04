@@ -4,10 +4,13 @@ var scoreScreen = document.querySelector('.score');
 var startButton = document.querySelector('#startbtn');
 var headerContainer = document.querySelector('.header'); //not sure if i need this
 var question = document.querySelector('question');
+var answerButtons = document.getElementById("answers");
 var nextBtn = document.querySelector('next');
 var questionHeader = document.getElementById('question-header');
 var scoreHeader = document.getElementById('score-header');
+var score = document.querySelector("#score");
 var currentQuestionIndex = 1 // changed from 0 to 1 now it works
+var answer = document.querySelector("#correct-answer");
 var questions = [
     {
         question: 'Which HTML tag does not require a closing tag?',
@@ -101,6 +104,30 @@ function showScore() {
 function init() {
     showStart();
 };
+//save user section
+submitButton.addEventListener("click", function (event) {
+    event.preventDefault();
+
+    submitButton.setAttribute("disabled", ""); //disabled submit button 
+    //user initials
+    var userScore = {
+        initials: userInitials.value.trim(),
+        score: timeLeft
+    }
+    userInitials.value = "";
+
+    highScores = JSON.parse(localStorage.getItem("initials"));  //load highscores
+    if (highScores == null) {
+        highScores = [];
+    }
+
+    highScores.push(userScore); //add user to highscores
+
+    localStorage.setItem("initials", JSON.stringify(highScores)); //save to local storage
+    loadHighScores();
+});
+
+
 
 init();
 
