@@ -5,7 +5,7 @@ var startButton = document.querySelector('#startbtn');
 var headerContainer = document.querySelector('.header'); //not sure if i need this
 var question = document.querySelector('question');
 var answerButtons = document.getElementById("answers");
-var nextBtn = document.querySelector('next');
+var nextBtn = document.querySelector('next'); // i think i can delete this one
 var submitButton = document.querySelector("#submit-button");
 var questionHeader = document.getElementById('question-header');
 var scoreHeader = document.getElementById('score-header');
@@ -13,6 +13,8 @@ var score = document.querySelector("#score");
 var currentQuestionIndex = 1 // changed from 0 to 1 now it works
 var answer = document.querySelector("#correct-answer");
 var userInitials = document.querySelector("#initials");
+var highScores = document.querySelector("#high-scores");
+var checkAnswer = document.querySelector("#check-answer");
 var questions = [
     {
         question: 'Which HTML tag does not require a closing tag?',
@@ -95,6 +97,22 @@ questionsScreen.addEventListener('click', function (event) {
     setNextQuestion();
 });
 
+function checkAnswer(currentQuestionIndex)  //why is check answer red???  changed event to say currentquestionindex
+answerButtons.innerHTML = ""; //removes answer buttons from HTML
+//var buttons = document.getElementsByTagName('button');
+var userAnswer = event.target.value;  //retrieving the value of target
+var correctAnswer = questionsList[currentQuestion].answer; //pull from questionList the correctAnswer for the current question to complete if/else
+if (userAnswer == correctAnswer) {     // if true display correct
+    answer.textContent = "correct";
+}
+
+else {
+    answer.textContent = "wrong";      //if false display wrong 
+    timeLeft--;
+};
+
+
+
 function showScore() {
     questionHeader.style.display = "none"; // all screens hidden from the score paage, still show start header
     startScreen.style.display = "none";
@@ -135,10 +153,3 @@ startButton.addEventListener('click', function (event) {
     localStorage.setItem("initials", JSON.stringify(highScores)); //save to local storage
     loadHighScores();
 });
-
-
-
-init();
-
-
-
