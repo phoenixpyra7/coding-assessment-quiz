@@ -9,7 +9,7 @@ var submitButton = document.querySelector("#submit-button");
 var questionHeader = document.getElementById("question-header");
 var scoreHeader = document.getElementById("score-header");
 
-var questionScreen = document.getElementById("question-screen");
+var questionScreen = document.getElementById("question-screen"); // similar to one on line 2
 var scoreScreen = document.getElementById("score-screen");
 
 var score = document.querySelector("#score");
@@ -18,6 +18,7 @@ var answer = document.querySelector("#correct-answer");
 var userInitials = document.querySelector("#initials");
 var highScores = document.querySelector("#high-scores");
 var checkAnswer = document.querySelector("#check-answer");
+var selectedAnswer = document.querySelector("#selected-answer");
 var questions = [
   {
     question: "Which HTML tag does not require a closing tag?",
@@ -56,17 +57,11 @@ function showStart() {
   scoreScreen.style.display = "none";
   scoreHeader.style.display = "none";
 }
-// //event listener to proceed to the questions
-// startButton.addEventListener('click', function (event) {
-//     if (event.target.matches('button'));
-//     showQuestions();
-//     showQuestion(0);
-// });
 
 function showQuestions() {
   questionHeader.style.display = null; // all screens hidden from the questions paage, still show start header
   startScreen.style.display = "none";
-  questionScreen.style.display = null; //do I need to do this for the questions themselves?
+  questionScreen.style.display = null;
   scoreScreen.style.display = "none";
   scoreHeader.style.display = "none";
 }
@@ -75,21 +70,19 @@ function setNextQuestion() {
   showQuestion(currentQuestionIndex); // show a question from the question index
   currentQuestionIndex++; //current question plus 1
   if (currentQuestionIndex === 6) {
-    // questions 12345 -not weighted like the index ie 3. if mak 6 i see all 5
+    // questions 12345 -not weighted like the index ie 3. if make this 6 i see all 5
     currentQuestionIndex = 0; //loop back after all questions answered - No longer works
     showScore(); //call the score. Don't have point system yet
   }
 }
 
 function showQuestion(currentQuestionIndex) {
-  //current question index now equals 0 -but why if its 1 now when i fixed
-  // console.log("is this working?")
   if (questions[currentQuestionIndex] === undefined) {
     showScore();
   }
-  questionsScreen.innerHTML = "";  
+  questionsScreen.innerHTML = "";
   var questionP = document.createElement("p");
-  questionP.innerHTML = questions[currentQuestionIndex].question; //dont have to touch bttn to get nxt, how fix?
+  questionP.innerHTML = questions[currentQuestionIndex].question;
   var answer1 = document.createElement("button");
   var answer2 = document.createElement("button");
   var answer3 = document.createElement("button");
@@ -98,35 +91,54 @@ function showQuestion(currentQuestionIndex) {
   answer2.innerHTML = questions[currentQuestionIndex].options[1];
   answer3.innerHTML = questions[currentQuestionIndex].options[2];
   answer4.innerHTML = questions[currentQuestionIndex].options[3];
-  questionsScreen.append(questionP, answer1, answer2, answer3, answer4); // append questions and answers
+  questionsScreen.append(questionP, answer1, answer2, answer3, answer4);// append questions and answers
+  // this is where i started trying code
+  answer1.setAttribute("value", 0);
+  answer2.setAttribute("value", 1);
+  answer3.setAttribute("value", 2);
+  answer4.setAttribute("value", 3);
+ 
+  answer1.addEventListener("click", checkAnswer);
+//end of trying code
+//moved the next function into this to see if it would work
+  function checkAnswer(currentQuestionIndex) {
+    answerButtons.innerHTML = "";
+    var selectedAnswer = currentQuestionIndex.target.value; //retrieving the value of target
+    var correctAnswer = options[currentQuestionIndex].answer; //pull from questionList the correctAnswer for the current question to complete if/else
+    if (selectedAnswer == correctAnswer) {
+      result.textContent = "correct"; // if true display correct
+    } else {
+      result.textContent = "wrong"; //if false display wrong
+      timeLeft--;
+    }
+  }
+
 }
 
 //event listener to proceed to the score
 questionsScreen.addEventListener("click", function (event) {
-  if (event.target.matches("button")); //what is the word button referencing no class, just strtbttn class
+  if (event.target.matches("button"));
   //console.log('the button was hit')    -this was to test the button, which worked
   setNextQuestion();
 });
 
-function checkAnswer(currentQuestionIndex) {
-  answerButtons.innerHTML = ""; //removes answer buttons from HTML
-  //var buttons = document.getElementsByTagName('button');
-  var userAnswer = event.target.value; //retrieving the value of target
-  var correctAnswer = questionsList[currentQuestion].answer; //pull from questionList the correctAnswer for the current question to complete if/else
-  if (userAnswer == correctAnswer) {
-    // if true display correct
-    answer.textContent = "correct";
-  } else {
-    answer.textContent = "wrong"; //if false display wrong
-    timeLeft--;
-  }
-}
+// function checkAnswer(currentQuestionIndex) {
+//     answerButtons.innerHTML = "";
+//     var selectedAnswer = currentQuestionIndex.target.value; //retrieving the value of target
+//     var correctAnswer = options[currentQuestionIndex].answer; //pull from questionList the correctAnswer for the current question to complete if/else
+//     if (selectedAnswer == correctAnswer) {
+//       result.textContent = "correct"; // if true display correct
+//     } else {
+//       result.textContent = "wrong"; //if false display wrong
+//       timeLeft--;
+//     }
+//   }
 
 function showScore() {
   questionHeader.style.display = "none"; // all screens hidden from the score paage, still show start header
-  startScreen.style.display = "none";
+  startScreen.style.display = "none"; //why is style word white. double checked all poss
   questionScreen.style.display = "none";
-  scoreScreen.style.display = null; //why is style white. double checked all poss
+  scoreScreen.style.display = null;
   scoreHeader.style.display = null;
 }
 
