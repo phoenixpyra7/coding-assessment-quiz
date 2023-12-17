@@ -11,9 +11,9 @@ var scoreHeader = document.getElementById("score-header");
 
 var questionScreen = document.getElementById("question-screen"); // similar to one on line 2
 var scoreScreen = document.getElementById("score-screen");
-
+var userScore = 0;
 var score = document.querySelector("#score");
-var currentQuestionIndex = 1; // changed from 0 to 1 now it works
+var currentQuestionIndex = 0; // changed from 0 to 1 now it works
 var answer = document.querySelector("#correct-answer");
 var userInitials = document.querySelector("#initials");
 var highScores = document.querySelector("#high-scores");
@@ -59,7 +59,7 @@ function showStart() {
 }
 
 function showQuestions() {
-  questionHeader.style.display = null; // all screens hidden from the questions paage, still show start header
+  questionHeader.style.display = null; // all screens hidden from the questions page, still show start header
   startScreen.style.display = "none";
   questionScreen.style.display = null;
   scoreScreen.style.display = "none";
@@ -67,12 +67,12 @@ function showQuestions() {
 }
 
 function setNextQuestion() {
-  showQuestion(currentQuestionIndex); // show a question from the question index
-  currentQuestionIndex++; //current question plus 1
-  if (currentQuestionIndex === 6) {
-    // questions 12345 -not weighted like the index ie 3. if make this 6 i see all 5
-    currentQuestionIndex = 0; //loop back after all questions answered - No longer works
-    showScore(); //call the score. Don't have point system yet
+  currentQuestionIndex++;
+  showQuestion(currentQuestionIndex);
+
+  if (currentQuestionIndex === questions.length) {
+    // currentQuestionIndex = 0;
+    showScore();
   }
 }
 
@@ -91,28 +91,28 @@ function showQuestion(currentQuestionIndex) {
   answer2.innerHTML = questions[currentQuestionIndex].options[1];
   answer3.innerHTML = questions[currentQuestionIndex].options[2];
   answer4.innerHTML = questions[currentQuestionIndex].options[3];
-  questionsScreen.append(questionP, answer1, answer2, answer3, answer4);// append questions and answers
+  questionsScreen.append(questionP, answer1, answer2, answer3, answer4); // append questions and answers
   // this is where i started trying code
   answer1.setAttribute("value", 0);
   answer2.setAttribute("value", 1);
   answer3.setAttribute("value", 2);
   answer4.setAttribute("value", 3);
- 
+
   answer1.addEventListener("click", checkAnswer);
-//end of trying code
-//moved the next function into this to see if it would work
+  //end of trying code
+  //moved the next function into this to see if it would work
   function checkAnswer(currentQuestionIndex) {
     answerButtons.innerHTML = "";
     var selectedAnswer = currentQuestionIndex.target.value; //retrieving the value of target
     var correctAnswer = options[currentQuestionIndex].answer; //pull from questionList the correctAnswer for the current question to complete if/else
     if (selectedAnswer == correctAnswer) {
-      result.textContent = "correct"; // if true display correct
+      result.textContent = "correct";
+      userScore++; // if true display correct
     } else {
       result.textContent = "wrong"; //if false display wrong
       timeLeft--;
     }
   }
-
 }
 
 //event listener to proceed to the score
@@ -122,26 +122,26 @@ questionsScreen.addEventListener("click", function (event) {
   setNextQuestion();
 });
 
-// function checkAnswer(currentQuestionIndex) {
-//     answerButtons.innerHTML = "";
-//     var selectedAnswer = currentQuestionIndex.target.value; //retrieving the value of target
-//     var correctAnswer = options[currentQuestionIndex].answer; //pull from questionList the correctAnswer for the current question to complete if/else
-//     if (selectedAnswer == correctAnswer) {
-//       result.textContent = "correct"; // if true display correct
-//     } else {
-//       result.textContent = "wrong"; //if false display wrong
-//       timeLeft--;
-//     }
-//   }
+function checkAnswer(currentQuestionIndex) {
+  answerButtons.innerHTML = "";
+  var selectedAnswer = currentQuestionIndex.target.value; //retrieving the value of target
+  var correctAnswer = options[currentQuestionIndex].answer; //pull from questionList the correctAnswer for the current question to complete if/else
+  if (selectedAnswer == correctAnswer) {
+    result.textContent = "correct"; // if true display correct
+  } else {
+    result.textContent = "wrong"; //if false display wrong
+    // timeLeft--;
+  }
+}
 
 function showScore() {
   questionHeader.style.display = "none"; // all screens hidden from the score paage, still show start header
   startScreen.style.display = "none"; //why is style word white. double checked all poss
   questionScreen.style.display = "none";
   scoreScreen.style.display = null;
+  scoreScreen.innerHTML = "Congratulations on completing the assessment, here is your score: " + userScore;
   scoreHeader.style.display = null;
 }
-
 function init() {
   showStart();
 }
@@ -158,19 +158,19 @@ startButton.addEventListener("click", function (event) {
   showQuestion(0);
 
   //user initials
-  //   var userScore = {
-  //     initials: userInitials.value.trim(),
-  //     score: timeLeft,
-  //   };
-  //   userInitials.value = "";
+  var userScore = {
+    initials: userInitials.value.trim(),
+    score: timeLeft,
+  };
+  userInitials.value = "";
 
-  //   highScores = JSON.parse(localStorage.getItem("initials")); //load highscores
-  //   if (highScores == null) {
-  //     highScores = [];
-  //   }
+  highScores = JSON.parse(localStorage.getItem("initials")); //load highscores
+  if (highScores == null) {
+    highScores = [];
+  }
 
-  //   highScores.push(userScore); //add user to highscores
+  highScores.push(userScore); //add user to highscores
 
-  //   localStorage.setItem("initials", JSON.stringify(highScores)); //save to local storage
-  //   loadHighScores();
+  localStorage.setItem("initials", JSON.stringify(highScores)); //save to local storage
+  loadHighScores();
 });
