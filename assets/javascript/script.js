@@ -1,24 +1,30 @@
-var startScreen = document.querySelector(".start");
-var questionsScreen = document.querySelector(".questions");
-var startButton = document.querySelector("#startbtn");
 var headerContainer = document.querySelector(".header"); //not sure if i need this
+
+var startScreen = document.querySelector(".start");
+var startButton = document.querySelector("#startbtn");
+
+var questionHeader = document.getElementById("question-header");
+var questionsScreen = document.querySelector(".questions");
+var questionScreen = document.getElementById("question-screen"); // similar to one on line 2 but need both
 var question = document.querySelector("question");
+var currentQuestionIndex = 0; // changed from 0 to 1 now it works
+
 var answerButtons = document.getElementById("answers");
+var selectedAnswer = document.querySelector("#selected-answer");
+var answer = document.querySelector("#correct-answer");
+var checkAnswer = document.querySelector("#check-answer");
+
 var nextBtn = document.querySelector("next"); // i think i can delete this one
 var submitButton = document.querySelector("#submit-button");
-var questionHeader = document.getElementById("question-header");
-var scoreHeader = document.getElementById("score-header");
 
-var questionScreen = document.getElementById("question-screen"); // similar to one on line 2
+var scoreHeader = document.getElementById("score-header");
 var scoreScreen = document.getElementById("score-screen");
-var userScore = 0;
-var score = document.querySelector("#score");
-var currentQuestionIndex = 0; // changed from 0 to 1 now it works
-var answer = document.querySelector("#correct-answer");
 var userInitials = document.querySelector("#initials");
+var userScore = 0;
+var score = document.querySelector("#user-score"); // = document.querySelector("#score");
+var finalScore = document.querySelector("#final-score");
 var highScores = document.querySelector("#high-scores");
-var checkAnswer = document.querySelector("#check-answer");
-var selectedAnswer = document.querySelector("#selected-answer");
+
 var questions = [
   {
     question: "Which HTML tag does not require a closing tag?",
@@ -29,17 +35,17 @@ var questions = [
     question:
       "Which of the following data types is called a compound data type?",
     options: ["A. String", "B. Symbol", "C. Boolean", "D. Array"],
-    correctAnswer: [4],
+    correctAnswer: [3],
   },
   {
     question:
-      "Which keyword declares a local variable, meaning the variable can only be accessed within the block of code where it is declared ?",
+      "Which keyword declares a local variable, meaning the variable can only be accessed within the block of code where it is declared?",
     options: ["A. let", "B. const", "C. var", "D. HTML"],
     correctAnswer: [0],
   },
   {
     question: "How do you inset a copyright symbol in HTML?",
-    options: ["A. @copy", "B. & #167", "C. C/2023", "D. & #169"], //put space in B and D-othwise they gen a symbol
+    options: ["A. @copy", "B. & #167", "C. C/2023", "D. & #169"], //put space within B and D options-othwise they gen a symbol
     correctAnswer: [3],
   },
   {
@@ -47,7 +53,6 @@ var questions = [
     options: ["A. Fixed", "B. Straight", "C. Sticky", "D. Absolute"],
     correctAnswer: [1],
   },
-  // I need to give the correct answers points
 ];
 
 function showStart() {
@@ -69,7 +74,6 @@ function showQuestions() {
 function setNextQuestion() {
   currentQuestionIndex++;
   showQuestion(currentQuestionIndex);
-
   if (currentQuestionIndex === questions.length) {
     // currentQuestionIndex = 0;
     showScore();
@@ -87,10 +91,10 @@ function showQuestion(currentQuestionIndex) {
   var answer2 = document.createElement("button");
   var answer3 = document.createElement("button");
   var answer4 = document.createElement("button");
-  answer1.innerHTML = questions[currentQuestionIndex].options[0];
-  answer2.innerHTML = questions[currentQuestionIndex].options[1];
-  answer3.innerHTML = questions[currentQuestionIndex].options[2];
-  answer4.innerHTML = questions[currentQuestionIndex].options[3];
+  answer1.innerHTML = questions[currentQuestionIndex].options[1]; //shouldnt these be a,b,c,d?
+  answer2.innerHTML = questions[currentQuestionIndex].options[2];
+  answer3.innerHTML = questions[currentQuestionIndex].options[3];
+  answer4.innerHTML = questions[currentQuestionIndex].options[4];
   questionsScreen.append(questionP, answer1, answer2, answer3, answer4); // append questions and answers
   // this is where i started trying code
   answer1.setAttribute("value", 0);
@@ -101,17 +105,26 @@ function showQuestion(currentQuestionIndex) {
   answer1.addEventListener("click", checkAnswer);
   //end of trying code
   //moved the next function into this to see if it would work
-  function checkAnswer(currentQuestionIndex) {
-    answerButtons.innerHTML = "";
-    var selectedAnswer = currentQuestionIndex.target.value; //retrieving the value of target
-    var correctAnswer = options[currentQuestionIndex].answer; //pull from questionList the correctAnswer for the current question to complete if/else
-    if (selectedAnswer == correctAnswer) {
-      result.textContent = "correct";
-      userScore++; // if true display correct
+  function checkAnswer(event) {
+    event.preventDefault(); //suggested but unsure of it
+    var selectedAnswer = event.target.value; //retrieving the value of target used to say .target.value;
+    var answer = questions[currentQuestionIndex].correctAnswer; //pull from questionList the correctAnswer for the current question to complete if/else
+    var result = document.querySelector("#result"); //  answerButtons.innerHTML = "";
+    if (selectedAnswer == answer) {
+      console.log("correct");
+      //if (selectedAnswer == correctAnswer) {
+      userScore++;
+      // result.textContent = "correct";
     } else {
-      result.textContent = "wrong"; //if false display wrong
-      timeLeft--;
+      console.log("wrong");
+      // result.textContent = "wrong";
     }
+    //   result.textContent = "correct";
+    //   userScore++; // if true display correct
+    // } else {
+
+    //   result.textContent = "wrong"; //if false display wrong
+    // }
   }
 }
 
@@ -120,31 +133,28 @@ questionsScreen.addEventListener("click", function (event) {
   if (event.target.matches("button"));
   //console.log('the button was hit')    -this was to test the button, which worked
   setNextQuestion();
-});
+  console.log(currentQuestionIndex); //adding anything i can to find holes
+  console.log(questions.length);  //adding anything i can to find holes
+  console.log(userScore);  //adding anything i can to find holes
 
-function checkAnswer(currentQuestionIndex) {
-  answerButtons.innerHTML = "";
-  var selectedAnswer = currentQuestionIndex.target.value; //retrieving the value of target
-  var correctAnswer = options[currentQuestionIndex].answer; //pull from questionList the correctAnswer for the current question to complete if/else
-  if (selectedAnswer == correctAnswer) {
-    result.textContent = "correct"; // if true display correct
-  } else {
-    result.textContent = "wrong"; //if false display wrong
-    // timeLeft--;
-  }
-}
+  console.log('the button was hit') //adding anything i can to find holes
+
+});
 
 function showScore() {
   questionHeader.style.display = "none"; // all screens hidden from the score paage, still show start header
   startScreen.style.display = "none"; //why is style word white. double checked all poss
   questionScreen.style.display = "none";
   scoreScreen.style.display = null;
-  scoreScreen.innerHTML = "Congratulations on completing the assessment, here is your score: " + userScore;
+  scoreScreen.innerHTML =
+    "Congratulations on completing the assessment, here is your score: " +
+    userScore;
   scoreHeader.style.display = null;
 }
-function init() {
-  showStart();
-}
+
+// function init() {
+//   showStart();
+// }
 //save user section
 // submitButton.addEventListener("click", function (event)) {  // need to fix this
 //     event.preventDefault();
@@ -159,10 +169,10 @@ startButton.addEventListener("click", function (event) {
 
   //user initials
   var userScore = {
-    initials: userInitials.value.trim(),
-    score: timeLeft,
+    initials: userInitials, ///  changed from userInitials.value.trim()
+    score: userScore,
   };
-  userInitials.value = "";
+  //userInitials.value = "";
 
   highScores = JSON.parse(localStorage.getItem("initials")); //load highscores
   if (highScores == null) {
@@ -172,5 +182,5 @@ startButton.addEventListener("click", function (event) {
   highScores.push(userScore); //add user to highscores
 
   localStorage.setItem("initials", JSON.stringify(highScores)); //save to local storage
-  loadHighScores();
+  // loadHighScores(); //says this is not defined
 });
