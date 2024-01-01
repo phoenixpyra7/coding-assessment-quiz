@@ -14,6 +14,9 @@ var selectedAnswer = document.querySelector("#selected-answer");
 var answer = document.querySelector("#correct-answer");
 var checkAnswer = document.querySelector("#check-answer");
 
+var correctAnswer = 1; //not working to give a point value
+var wrong = 0; 
+
 var nextBtn = document.querySelector("next"); // i think i can delete this one
 var submitButton = document.querySelector("#submit-button");
 
@@ -109,7 +112,7 @@ function showQuestion(currentQuestionIndex) {
     event.preventDefault(); //suggested but unsure of it
     var selectedAnswer = event.target.value; //retrieving the value of target used to say .target.value;
     var answer = questions[currentQuestionIndex].correctAnswer; //pull from questionList the correctAnswer for the current question to complete if/else
-    var result = document.querySelector("#result"); //  answerButtons.innerHTML = "";
+    var result = document.querySelector("#result"); //  answerButtons.innerHTML = ""; CHANGE RESUULT TO SELECTEDANSWER?
     if (selectedAnswer == answer) {
       console.log("correct");
       //if (selectedAnswer == correctAnswer) {
