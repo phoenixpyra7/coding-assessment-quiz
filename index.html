@@ -1,66 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>coding-assessment-quiz</title>
 
     <!-- Minified version / added "basic" template from simple css-->
-    <link rel="stylesheet" href="https://unpkg.com/simpledotcss/simple.min.css">
-    <link rel="stylesheet" href="./assets/css/style.css"> <!-- shouldn't this be a scr type? -->
-</head>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/simpledotcss/simple.min.css"
+    />
+    <link rel="stylesheet" href="./assets/css/style.css" />
+  </head>
 
-
-<body>
+  <body>
     <!-- <header>  -->
     <h2>Coding Assessment Quiz</h2>
-    <!-- </header> -->
-
-    <main> <!-- he made this a class but i am unsure why *********************************************-->
-        <section class="start">
-
-            <p><strong>You will have 60 seconds to answer 5 questions. If you answer a question wrong, you will have 10
-                    seconds deducted from the timer.</strong></p>
-            <button id="startbtn">Start</button>
-        </section>
-    </main>
-
-    <div id="question-screen" style="display:none">
-    <header id="question-header" style="display:none">
-    <h2>Questions</h2>
-    </header>
+    <!-- </header> removed to avoid white space -->
 
     <main>
+      <section class="start">
+        <p>
+          <strong
+            >You will have 60 seconds to answer 5 questions. If you answer a
+            question wrong, you will have 10 seconds deducted from the
+            timer.</strong
+          >
+        </p>
+        <button id="startbtn">Start</button>
+      </section>
+    </main>
+
+    <div id="question-screen" style="display: none">
+      <header id="question-header" style="display: none">
+        <h2>Questions</h2>
+      </header>
+
+      <main>
         <!-- set up 5 buttons for the quiz section, updt: moved them into the js -->
         <section class="questions">
-            <p id="question"></p>
-            <button id="answer1"></button>
-            <button id="answer2"></button>
-            <button id="answer3"></button>
-            <button id="answer4"></button>
-            <p id="result"></p>
-            <p id="timer"></p>
-            <button id="next">Next</button>
+          <p id="question"></p>
+          <button id="answer1"></button>
+          <button id="answer2"></button>
+          <button id="answer3"></button>
+          <button id="answer4"></button>
+          <p id="result"></p>
+          <p id="timer"></p>
+          <button id="next">Next</button>
         </section>
-    </main>
+      </main>
     </div>
 
-    <!-- set up score section -->
-    <div id="score-screen" style="display:none">
+    <!-- created score section -->
+    <div id="score-screen" style="display: none">
+      <header id="score-header" style>
+        <h2>Score</h2>
+      </header>
 
-        <header id="score-header" style>
-            <h2>Score</h2>
-        </header>
-        
-        <main>
-            <section class="score">
-                <p>Congratulations on completing the assessment, here is your score:</p>
-            </section>
-        </main>
+      <main>
+        <section class="score">
+          <p>
+            Congratulations on completing the assessment, here is your score:
+          </p>
+        </section>
+      </main>
     </div>
 
-    <script src="./assets/javascript/script.js"></script> <!-- added js, and tested it works-->
-</body>
-
+    <script src="./assets/javascript/script.js"></script>
+    <!-- added js, and tested it works-->
+  </body>
 </html>
