@@ -1,17 +1,19 @@
-# coding-assessment-quiz
+#coding-assessment-quiz
 
 ## Description
 
-This is a r. 
+This is a basic five question coding assessment quiz, each correct answer earns 1 point, for a total of no more than 5 points.  
 
 ## Screenshot
 
-![Password generator](./assets/images/Pawod-enrtor.png)
+![coding-assessment-quiz](./assets/images/Password-Generator.png)
 
 
 ## Link 
 
-Live URL: https://phoenixpy.gitb.io/pasd-grator/ 
+Live URL: https://phoenixpyra7.github.io/coding-assessment-quiz/ 
 
 
-Sources: 
+Sources:  
+
+Simple CSS https://simplecss.org/
