@@ -32,29 +32,29 @@ var questions = [
   {
     question: "Which HTML tag does not require a closing tag?",
     options: ["A. section", "B. div", "C. br", "D. body"],
-    correctAnswer: [2], //added square brackets to see if would fix code nothing changed
+    correctAnswer: 2, //added square brackets to see if would fix code nothing changed
   },
   {
     question:
       "Which of the following data types is called a compound data type?",
     options: ["A. String", "B. Symbol", "C. Boolean", "D. Array"],
-    correctAnswer: [3],
+    correctAnswer: 3,
   },
   {
     question:
       "Which keyword declares a local variable, meaning the variable can only be accessed within the block of code where it is declared?",
     options: ["A. let", "B. const", "C. var", "D. HTML"],
-    correctAnswer: [0],
+    correctAnswer: 0,
   },
   {
     question: "How do you inset a copyright symbol in HTML?",
     options: ["A. @copy", "B. & #167", "C. C/2023", "D. & #169"], //put space within B and D options-othwise they gen a symbol
-    correctAnswer: [3],
+    correctAnswer: 3,
   },
   {
     question: "Which of the following is not a positioning property in CSS?",
     options: ["A. Fixed", "B. Straight", "C. Sticky", "D. Absolute"],
-    correctAnswer: [1],
+    correctAnswer: 1,
   },
 ];
 
@@ -94,10 +94,10 @@ function showQuestion(currentQuestionIndex) {
   var answer2 = document.createElement("button");
   var answer3 = document.createElement("button");
   var answer4 = document.createElement("button");
-  answer1.innerHTML = questions[currentQuestionIndex].options[1]; //shouldnt these be a,b,c,d?
-  answer2.innerHTML = questions[currentQuestionIndex].options[2];
-  answer3.innerHTML = questions[currentQuestionIndex].options[3];
-  answer4.innerHTML = questions[currentQuestionIndex].options[4];
+  answer1.innerHTML = questions[currentQuestionIndex].options[0]; //shouldnt these be a,b,c,d?
+  answer2.innerHTML = questions[currentQuestionIndex].options[1];
+  answer3.innerHTML = questions[currentQuestionIndex].options[2];
+  answer4.innerHTML = questions[currentQuestionIndex].options[3];
   questionsScreen.append(questionP, answer1, answer2, answer3, answer4); // append questions and answers
   // this is where i started trying code
   answer1.setAttribute("value", 0);
@@ -106,11 +106,15 @@ function showQuestion(currentQuestionIndex) {
   answer4.setAttribute("value", 3);
 
   answer1.addEventListener("click", checkAnswer);
+  answer2.addEventListener("click", checkAnswer);
+  answer3.addEventListener("click", checkAnswer);
+  answer4.addEventListener("click", checkAnswer);
   //end of trying code
   //moved the next function into this to see if it would work
   function checkAnswer(event) {
     event.preventDefault(); //suggested but unsure of it
     var selectedAnswer = event.target.value; //retrieving the value of target used to say .target.value;
+    console.log("selectedAnswer: " + selectedAnswer);
     var answer = questions[currentQuestionIndex].correctAnswer; //pull from questionList the correctAnswer for the current question to complete if/else
     var result = document.querySelector("#result"); //  answerButtons.innerHTML = ""; CHANGE RESUULT TO SELECTEDANSWER?
     if (selectedAnswer == answer) {
@@ -136,7 +140,7 @@ questionsScreen.addEventListener("click", function (event) {
   if (event.target.matches("button"));
   //console.log('the button was hit')    -this was to test the button, which worked
   setNextQuestion();
-  console.log(currentQuestionIndex); //adding anything i can to find holes
+  console.log("CQindex: " +currentQuestionIndex); //adding anything i can to find holes
   console.log(questions.length);  //adding anything i can to find holes
   console.log(userScore);  //adding anything i can to find holes
 
