@@ -6,7 +6,7 @@ This is a basic five question coding assessment quiz, each correct answer earns 
 
 ## Screenshot
 
-![coding-assessment-quiz](./assets/images/Password-Generator.png)
+![coding-assessment-quiz]![Alt text](assets/images/CAQ1.png) ![Alt text](assets/images/CAQ2.png) ![Alt text](assets/images/CAQ3.png)
 
 
 ## Link 
@@ -14,6 +14,6 @@ This is a basic five question coding assessment quiz, each correct answer earns 
 Live URL: https://phoenixpyra7.github.io/coding-assessment-quiz/ 
 
 
-Sources:  
+## Sources:  
 
 Simple CSS https://simplecss.org/
