@@ -1,23 +1,24 @@
-var headerContainer = document.querySelector(".header"); //not sure if i need this
+//I decided to group my global vars together for faster referencing
+var headerContainer = document.querySelector(".header"); 
 
 var startScreen = document.querySelector(".start");
 var startButton = document.querySelector("#startbtn");
 
 var questionHeader = document.getElementById("question-header");
 var questionsScreen = document.querySelector(".questions");
-var questionScreen = document.getElementById("question-screen"); // similar to one on line 2 but need both
+var questionScreen = document.getElementById("question-screen"); // similar to another one but need both
 var question = document.querySelector("question");
-var currentQuestionIndex = 0; // changed from 0 to 1 now it works
+var currentQuestionIndex = 0; // index starts at 0 always
 
 var answerButtons = document.getElementById("answers");
 var selectedAnswer = document.querySelector("#selected-answer");
 var answer = document.querySelector("#correct-answer");
 var checkAnswer = document.querySelector("#check-answer");
 
-var correctAnswer = 1; //not working to give a point value
-var wrong = 0; 
+var correctAnswer = 1; 
+var wrong = 0;
 
-var nextBtn = document.querySelector("next"); // i think i can delete this one
+var nextBtn = document.querySelector("next"); 
 var submitButton = document.querySelector("#submit-button");
 
 var scoreHeader = document.getElementById("score-header");
@@ -27,12 +28,12 @@ var userScore = 0;
 var score = document.querySelector("#user-score"); // = document.querySelector("#score");
 var finalScore = document.querySelector("#final-score");
 var highScores = document.querySelector("#high-scores");
-
+//moved questions over from a seperate js to make things easier.
 var questions = [
   {
     question: "Which HTML tag does not require a closing tag?",
     options: ["A. section", "B. div", "C. br", "D. body"],
-    correctAnswer: 2, //added square brackets to see if would fix code nothing changed
+    correctAnswer: 2, //removed square brackets from the index
   },
   {
     question:
@@ -83,7 +84,7 @@ function setNextQuestion() {
   }
 }
 
-function showQuestion(currentQuestionIndex) {
+function showQuestion(currentQuestionIndex) { // is this where i want to start for my user initials, should i move this
   if (questions[currentQuestionIndex] === undefined) {
     showScore();
   }
@@ -94,30 +95,30 @@ function showQuestion(currentQuestionIndex) {
   var answer2 = document.createElement("button");
   var answer3 = document.createElement("button");
   var answer4 = document.createElement("button");
-  answer1.innerHTML = questions[currentQuestionIndex].options[0]; //shouldnt these be a,b,c,d?
+  answer1.innerHTML = questions[currentQuestionIndex].options[0]; //changed from 1-4 to be 0-3, as this is regarding the index
   answer2.innerHTML = questions[currentQuestionIndex].options[1];
   answer3.innerHTML = questions[currentQuestionIndex].options[2];
   answer4.innerHTML = questions[currentQuestionIndex].options[3];
   questionsScreen.append(questionP, answer1, answer2, answer3, answer4); // append questions and answers
-  // this is where i started trying code
+  
   answer1.setAttribute("value", 0);
   answer2.setAttribute("value", 1);
   answer3.setAttribute("value", 2);
   answer4.setAttribute("value", 3);
 
-  answer1.addEventListener("click", checkAnswer);
+  answer1.addEventListener("click", checkAnswer); //added event listeners for all questions to get the code to work properly
   answer2.addEventListener("click", checkAnswer);
   answer3.addEventListener("click", checkAnswer);
   answer4.addEventListener("click", checkAnswer);
-  //end of trying code
+ 
   //moved the next function into this to see if it would work
   function checkAnswer(event) {
-    event.preventDefault(); //suggested but unsure of it
-    var selectedAnswer = event.target.value; //retrieving the value of target used to say .target.value;
+    event.preventDefault(); 
+    var selectedAnswer = event.target.value; //retrieving the value of target
     console.log("selectedAnswer: " + selectedAnswer);
     var answer = questions[currentQuestionIndex].correctAnswer; //pull from questionList the correctAnswer for the current question to complete if/else
-    var result = document.querySelector("#result"); //  answerButtons.innerHTML = ""; CHANGE RESUULT TO SELECTEDANSWER?
-    if (selectedAnswer == answer) {
+    var result = document.querySelector("#result"); 
+    if (selectedAnswer == answer) { //changed from triple equal to double to make it work.
       console.log("correct");
       //if (selectedAnswer == correctAnswer) {
       userScore++;
@@ -126,12 +127,6 @@ function showQuestion(currentQuestionIndex) {
       console.log("wrong");
       // result.textContent = "wrong";
     }
-    //   result.textContent = "correct";
-    //   userScore++; // if true display correct
-    // } else {
-
-    //   result.textContent = "wrong"; //if false display wrong
-    // }
   }
 }
 
@@ -140,17 +135,16 @@ questionsScreen.addEventListener("click", function (event) {
   if (event.target.matches("button"));
   //console.log('the button was hit')    -this was to test the button, which worked
   setNextQuestion();
-  console.log("CQindex: " +currentQuestionIndex); //adding anything i can to find holes
-  console.log(questions.length);  //adding anything i can to find holes
-  console.log(userScore);  //adding anything i can to find holes
+  console.log("CQindex: " + currentQuestionIndex); //adding anything i can to find holes by using console logs
+  console.log(questions.length); 
+  console.log(userScore); 
 
-  console.log('the button was hit') //adding anything i can to find holes
-
+  console.log("the button was clicked"); //adding anything i can to find holes
 });
 
 function showScore() {
-  questionHeader.style.display = "none"; // all screens hidden from the score paage, still show start header
-  startScreen.style.display = "none"; //why is style word white. double checked all poss
+  questionHeader.style.display = "none"; // all screens hidden from the score page, still show start header
+  startScreen.style.display = "none";
   questionScreen.style.display = "none";
   scoreScreen.style.display = null;
   scoreScreen.innerHTML =
@@ -173,6 +167,18 @@ startButton.addEventListener("click", function (event) {
   if (event.target.matches("button"));
   showQuestions();
   showQuestion(0);
+
+  // Tutor pseudo code
+  // if the currentQuestionIndex is greater or equal to than the number of questions
+  // stop the loop that's displaying questions
+  // then we need to add an input and submit button to the highscore page
+  // then we need to add an event listener to the submit button
+  // when clicked, you can run the highscore local storage stuff that you have below
+  // make sure to move all of this out of this event listener function 172.
+
+  // after, if you want to, you can display all of the high scores
+  // highScores.forEach
+  // for each score, we will add a p element with the initials and score
 
   //user initials
   var userScore = {
