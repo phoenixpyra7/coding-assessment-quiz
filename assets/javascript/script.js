@@ -1,7 +1,7 @@
 //I decided to group my global vars together for faster referencing
 var headerContainer = document.querySelector(".header");
 
-var startScreen = document.querySelector(".start");
+var startScreen = document.querySelector(".start"); //"start-screen"
 var startButton = document.querySelector("#startbtn");
 
 var questionHeader = document.getElementById("question-header");
@@ -10,7 +10,7 @@ var questionScreen = document.getElementById("question-screen"); // similar to a
 var question = document.querySelector("question");
 var currentQuestionIndex = 0; // index starts at 0 always
 
-var answerButtons = document.getElementById("answers");
+var answerButtons = document.getElementById("button"); //"answer"
 var selectedAnswer = document.querySelector("#selected-answer");
 var answer = document.querySelector("#correct-answer");
 var checkAnswer = document.querySelector("#check-answer");
@@ -23,7 +23,7 @@ var submitButton = document.querySelector("#submit-button");
 
 var scoreHeader = document.getElementById("score-header");
 var scoreScreen = document.getElementById("score-screen");
-var userInitials = document.querySelector("#initials");
+var userInitials = document.querySelector("user-initials"); //#initials
 var userScore = 0;
 var score = document.querySelector("#user-score"); // = document.querySelector("#score");
 var finalScore = document.querySelector("#final-score");
@@ -196,20 +196,40 @@ startButton.addEventListener("click", function (event) {
   // for each score, we will add a p element with the initials and score
 
   //user initials still not working
-  var initials = userInitials.value.trim();
-  var userScore = {
-    initials,
+  //   var initials = userInitials.value.trim();
+  //   var userScore = {
+  //     initials,
+  //     score: userScore,
+  //   };
+  //   userInitials.value = "";
+
+  //   highScores = JSON.parse(localStorage.getItem("initials")); //load highscores
+  //   if (highScores == null) {
+  //     highScores = [];
+  //   }
+
+  //   highScores.push(userScore); //add user to highscores
+
+  //   localStorage.setItem("initials", JSON.stringify(highScores)); //save to local storage
+  //   // loadHighScores(); //says this is not defined
+  // });
+  var userInitialsInput = userInitials.value.trim();
+
+  var newUserScore = {
+    initials: userInitialsInput,
     score: userScore,
   };
+
   userInitials.value = "";
 
-  highScores = JSON.parse(localStorage.getItem("initials")); //load highscores
+  var highScores = JSON.parse(localStorage.getItem("initials")); //load highscores
   if (highScores == null) {
     highScores = [];
   }
 
-  highScores.push(userScore); //add user to highscores
+  highScores.push(newUserScore); //add user to highscores
 
   localStorage.setItem("initials", JSON.stringify(highScores)); //save to local storage
-  // loadHighScores(); //says this is not defined
+
+  highScores();
 });
