@@ -1,5 +1,5 @@
 //I decided to group my global vars together for faster referencing
-var headerContainer = document.querySelector(".header"); 
+var headerContainer = document.querySelector(".header");
 
 var startScreen = document.querySelector(".start");
 var startButton = document.querySelector("#startbtn");
@@ -15,10 +15,10 @@ var selectedAnswer = document.querySelector("#selected-answer");
 var answer = document.querySelector("#correct-answer");
 var checkAnswer = document.querySelector("#check-answer");
 
-var correctAnswer = 1; 
+var correctAnswer = 1;
 var wrong = 0;
 
-var nextBtn = document.querySelector("next"); 
+var nextBtn = document.querySelector("next");
 var submitButton = document.querySelector("#submit-button");
 
 var scoreHeader = document.getElementById("score-header");
@@ -89,12 +89,11 @@ function countdown() {
   function tick() {
     var ticker = document.getElementById("ticker");
     seconds--;
-    ticker.innerHTML =
-      "0:" + (seconds < 10 ? "0" : "") + String(seconds);
+    ticker.innerHTML = "0:" + (seconds < 10 ? "0" : "") + String(seconds);
     if (seconds > 0) {
       setTimeout(tick, 1000);
     } else {
-    // if time expires, sarcastic comment will appear
+      // if time expires, sarcastic comment will appear
       document.getElementById("timeBtn").innerHTML = `
           <div class="Btn" id="TimeExpBtn">
               <button type="time">Time up...Don't quit your day job!</button>
@@ -107,8 +106,8 @@ function countdown() {
 }
 countdown();
 
-
-function showQuestion(currentQuestionIndex) { // is this where i want to start for my user initials, should i move this
+function showQuestion(currentQuestionIndex) {
+  // is this where i want to start for my user initials, should i move this
   if (questions[currentQuestionIndex] === undefined) {
     showScore();
   }
@@ -124,7 +123,7 @@ function showQuestion(currentQuestionIndex) { // is this where i want to start f
   answer3.innerHTML = questions[currentQuestionIndex].options[2];
   answer4.innerHTML = questions[currentQuestionIndex].options[3];
   questionsScreen.append(questionP, answer1, answer2, answer3, answer4); // append questions and answers
-  
+
   answer1.setAttribute("value", 0);
   answer2.setAttribute("value", 1);
   answer3.setAttribute("value", 2);
@@ -134,15 +133,16 @@ function showQuestion(currentQuestionIndex) { // is this where i want to start f
   answer2.addEventListener("click", checkAnswer);
   answer3.addEventListener("click", checkAnswer);
   answer4.addEventListener("click", checkAnswer);
- 
+
   //moved the next function into this to see if it would work
   function checkAnswer(event) {
-    event.preventDefault(); 
+    event.preventDefault();
     var selectedAnswer = event.target.value; //retrieving the value of target
     console.log("selectedAnswer: " + selectedAnswer);
     var answer = questions[currentQuestionIndex].correctAnswer; //pull from questionList the correctAnswer for the current question to complete if/else
-    var result = document.querySelector("#result"); 
-    if (selectedAnswer == answer) { //changed from triple equal to double to make it work.
+    var result = document.querySelector("#result");
+    if (selectedAnswer == answer) {
+      //changed from triple equal to double to make it work.
       console.log("correct");
       //if (selectedAnswer == correctAnswer) {
       userScore++;
@@ -160,8 +160,8 @@ questionsScreen.addEventListener("click", function (event) {
   //console.log('the button was hit')    -this was to test the button, which worked
   setNextQuestion();
   console.log("CQindex: " + currentQuestionIndex); //adding anything i can to find holes by using console logs
-  console.log(questions.length); 
-  console.log(userScore); 
+  console.log(questions.length);
+  console.log(userScore);
 
   console.log("the button was clicked"); //adding anything i can to find holes
 });
@@ -176,15 +176,6 @@ function showScore() {
     userScore;
   scoreHeader.style.display = null;
 }
-
-// function init() {
-//   showStart();
-// }
-//save user section
-// submitButton.addEventListener("click", function (event)) {  // need to fix this
-//     event.preventDefault();
-
-//     submitButton.setAttribute("disabled", "");  //disabled submit button
 
 //event listener to proceed to the questions
 startButton.addEventListener("click", function (event) {
@@ -204,12 +195,13 @@ startButton.addEventListener("click", function (event) {
   // highScores.forEach
   // for each score, we will add a p element with the initials and score
 
-  //user initials
+  //user initials still not working
+  var initials = userInitials.value.trim();
   var userScore = {
-    initials: userInitials, ///  changed from userInitials.value.trim()
+    initials,
     score: userScore,
   };
-  //userInitials.value = "";
+  userInitials.value = "";
 
   highScores = JSON.parse(localStorage.getItem("initials")); //load highscores
   if (highScores == null) {
