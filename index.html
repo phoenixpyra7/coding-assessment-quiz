@@ -22,9 +22,7 @@
       <section class="start">
         <p>
           <strong
-            >You will have 60 seconds to answer 5 questions. If you answer a
-            question wrong, you will have 10 seconds deducted from the
-            timer.</strong
+            >You will have 30 seconds to answer 5 questions. Good luck.</strong
           >
         </p>
         <button id="startbtn">Start</button>
@@ -45,12 +43,21 @@
           <button id="answer3"></button>
           <button id="answer4"></button>
           <p id="result"></p>
-          <p id="timer"></p>
+          <!-- <p id="timer"></p> -->
           <button id="next">Next</button>
         </section>
+            <!-- created timer section -->
+    <div class="btnGroup">
+      <span class="Btn" id="timeBtn">
+        <button type="time">30 Second Timer:</button>
+      </span>
+      <span class="timer">
+        <span id="ticker"></span>
+      </span>
+    </div>
       </main>
     </div>
-
+    
     <!-- created score section -->
     <div id="score-screen" style="display: none">
       <header id="score-header" style>

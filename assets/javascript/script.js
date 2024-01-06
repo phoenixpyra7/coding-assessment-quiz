@@ -83,6 +83,29 @@ function setNextQuestion() {
     showScore();
   }
 }
+//added a new timer section with only 30 sec to add element of urgency
+function countdown() {
+  var seconds = 30;
+  function tick() {
+    var ticker = document.getElementById("ticker");
+    seconds--;
+    ticker.innerHTML =
+      "0:" + (seconds < 10 ? "0" : "") + String(seconds);
+    if (seconds > 0) {
+      setTimeout(tick, 1000);
+    } else {
+      document.getElementById("timeBtn").innerHTML = `
+          // <div class="Btn" id="RestartBtn">
+          //     <button type="time">Restart</button>
+          // </div>
+      `;
+      document.getElementById("ticker").innerHTML = "";
+    }
+  }
+  tick();
+}
+countdown();
+
 
 function showQuestion(currentQuestionIndex) { // is this where i want to start for my user initials, should i move this
   if (questions[currentQuestionIndex] === undefined) {
