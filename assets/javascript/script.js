@@ -94,10 +94,11 @@ function countdown() {
     if (seconds > 0) {
       setTimeout(tick, 1000);
     } else {
+    // if time expires, sarcastic comment will appear
       document.getElementById("timeBtn").innerHTML = `
-          // <div class="Btn" id="RestartBtn">
-          //     <button type="time">Restart</button>
-          // </div>
+          <div class="Btn" id="TimeExpBtn">
+              <button type="time">Time up...Don't quit your day job!</button>
+          </div>
       `;
       document.getElementById("ticker").innerHTML = "";
     }
